@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "953087313788",
+    "firebase_url": "https://vtail-dev.firebaseio.com",
+    "project_id": "vtail-dev",
+    "storage_bucket": "vtail-dev.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:953087313788:android:502d16cc7edc6ee776c6f9",
+        "android_client_info": {
+          "package_name": "com.vtail.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "953087313788-78mqmv3o86cluadu057suo9ma9nqrfr4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKEjFxIJ_dIiTJ-urfX0lNRpgTL-6j9z0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "953087313788-78mqmv3o86cluadu057suo9ma9nqrfr4.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "953087313788-v8q4okp06l6karrlkpu7mmdd5554987i.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.vtail.app.dev"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
