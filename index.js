@@ -2,7 +2,8 @@
  * @format
  */
 
-import {AppRegistry} from 'react-native';
+import React from 'react';
+import {AppRegistry, Text, View} from 'react-native';
 import App from './App';
 import {name as appName} from './app.json';
 import messaging from '@react-native-firebase/messaging';
@@ -10,19 +11,37 @@ import notifee, {
   AndroidCategory,
   AndroidImportance,
 } from '@notifee/react-native';
+import {AndroidVisibility} from '@notifee/react-native/src/types/NotificationAndroid';
 
 AppRegistry.registerComponent(appName, () => App);
-// Register background handler
+
+function CustomComponent() {
+  return (
+    <View
+      style={{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'red',
+      }}>
+      <Text>A custom component</Text>
+    </View>
+  );
+}
+
+AppRegistry.registerComponent('custom', () => CustomComponent);
 
 messaging().setBackgroundMessageHandler(async remoteMessage => {
   const channelId = await notifee.createChannel({
-    id: 'default',
+    id: 'fullscreen',
     name: 'Default Channel',
+    visibility: AndroidVisibility.PUBLIC,
+    importance: AndroidImportance.HIGH,
   });
 
   await notifee.displayNotification({
     title: 'Notification Title',
-    body: 'Main body content of the notification',
+    body: 'Testing full screen notification from background',
     android: {
       // Recommended to set a category
       category: AndroidCategory.CALL,
@@ -30,7 +49,9 @@ messaging().setBackgroundMessageHandler(async remoteMessage => {
       importance: AndroidImportance.HIGH,
       fullScreenAction: {
         id: 'default',
+        launchActivity: 'com.awesomeproject.CustomActivity',
       },
+      visibility: AndroidVisibility.PUBLIC,
       channelId,
     },
   });

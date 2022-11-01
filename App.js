@@ -6,28 +6,20 @@ import notifee, {
   AndroidImportance,
 } from '@notifee/react-native';
 import messaging from '@react-native-firebase/messaging';
+import {AndroidVisibility} from '@notifee/react-native/src/types/NotificationAndroid';
 
 const App: () => Node = () => {
   async function onDisplayNotification() {
-    // Request permissions (required for iOS)
-    await notifee.requestPermission();
-
-    const token = messaging()
-      .getToken()
-      .then(token => {
-        console.log('token', token);
-      });
-
-    // Create a channel (required for Android)
     const channelId = await notifee.createChannel({
-      id: 'default',
+      id: 'fullscreen',
       name: 'Default Channel',
+      visibility: AndroidVisibility.PUBLIC,
+      importance: AndroidImportance.HIGH,
     });
 
-    // Display a notification
     await notifee.displayNotification({
       title: 'Notification Title',
-      body: 'Main body content of the notification',
+      body: 'Testing full-screen notification from foreground',
       android: {
         // Recommended to set a category
         category: AndroidCategory.CALL,
@@ -35,19 +27,14 @@ const App: () => Node = () => {
         importance: AndroidImportance.HIGH,
         fullScreenAction: {
           id: 'default',
+          mainComponent: 'custom-component',
         },
+        visibility: AndroidVisibility.PUBLIC,
+        asForegroundService: true,
         channelId,
       },
     });
   }
-
-  useEffect(() => {
-    const unsubscribe = messaging().onMessage(async remoteMessage => {
-      Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
-    });
-
-    return unsubscribe;
-  }, []);
 
   return (
     <SafeAreaView>
