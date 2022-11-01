@@ -89,7 +89,7 @@ export const notifications = {
       sound: 'default',
       fullScreenAction: {
         id: 'default',
-        // mainComponent: 'full-screen-main-component'
+        // mainComponent: 'full-screen-main-component', // not working for some reasons
         launchActivity: 'com.awesomeproject.CustomActivity',
       },
     },
